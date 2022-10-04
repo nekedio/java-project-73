@@ -1,0 +1,38 @@
+plugins {
+    id 'application'
+    id 'org.springframework.boot' version '2.7.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'checkstyle'
+
+}
+
+group = 'hexlet.code'
+version '1.0-SNAPSHOT'
+
+application {
+  mainClass = 'hexlet.code.Application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    options.release = 17
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    // tag::actuator[]
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // end::actuator[]
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // tag::tests[]
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    // end::tests[]
+}
+
+test {
+    useJUnitPlatform()
+}
+
