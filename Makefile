@@ -1,6 +1,7 @@
 run:
 	gradle bootRun
 
+full-check: lint test run
 
 lint: lint-main lint-test
 
