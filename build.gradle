@@ -1,16 +1,16 @@
 plugins {
     id 'application'
-    id 'org.springframework.boot' version '2.7.1'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'org.liquibase.gradle' version '2.0.4'
     id 'checkstyle'
-
 }
 
 group = 'hexlet.code'
 version '1.0-SNAPSHOT'
 
 application {
-  mainClass = 'hexlet.code.Application'
+    mainClass = 'hexlet.code.Application'
 }
 
 repositories {
@@ -22,19 +22,52 @@ compileJava {
     options.encoding = 'UTF-8'
 }
 
+
 dependencies {
-    // tag::actuator[]
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    // end::actuator[]
+    //spring, spring-test
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    // tag::tests[]
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    // end::tests[]
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // db
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.liquibase:liquibase-core'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 test {
     useJUnitPlatform()
 }
 
+//для работы с базой
+diffChangeLog {
+    dependsOn compileJava
+}
+
+liquibase {
+    activities {
+        main {
+            // Указываем путь, по которому будет сгенерирован файл миграции
+            changeLogFile 'src/main/resources/db/changelog/changelog-master.xml'
+            // Указывем источник, с которым будут сравниваться изменения
+            // Это база данных, изначально она пустая
+            url 'jdbc:h2:./taskManager'
+            // Имя пользователя и пароль для подключения к базе
+            username ''
+            password ''
+            // Сравниваем с моделями, задавая пакет
+            referenceUrl 'hibernate:spring:io.hexlet.javaspringblog.model.' +
+                        // Указываем диалект
+                        '?dialect=org.hibernate.dialect.H2Dialect' +
+                        // Указываем правила именования таблиц и столбцов,
+                        // чтобы они соответствовали правилам Spring
+                        '&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy'
+        }
+    }
+}
+
+// для хероку
 task stage(dependsOn: [clean, installDist])
 installDist.mustRunAfter clean
+

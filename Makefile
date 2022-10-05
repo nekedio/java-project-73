@@ -1,5 +1,5 @@
-run:
-	gradle bootRun
+run: clean
+	./gradlew bootRun --args='--spring.profiles.active=dev'
 
 full-check: lint test run
 
@@ -14,5 +14,7 @@ lint-main:
 lint-test:
 	./gradlew checkstyleTest
 
+clean:
+	rm *.db
 
 
