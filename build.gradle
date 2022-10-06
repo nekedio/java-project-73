@@ -4,6 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id 'org.liquibase.gradle' version '2.0.4'
     id 'checkstyle'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 group = 'hexlet.code'
@@ -40,6 +41,11 @@ test {
     useJUnitPlatform()
 }
 
+testlogger {
+  showStandardStreams = true
+}
+
+
 //для работы с базой
 diffChangeLog {
     dependsOn compileJava
@@ -58,10 +64,10 @@ liquibase {
             password ''
             // Сравниваем с моделями, задавая пакет
             referenceUrl 'hibernate:spring:io.hexlet.javaspringblog.model.' +
-                        // Указываем диалект
+            // Указываем диалект
                         '?dialect=org.hibernate.dialect.H2Dialect' +
-                        // Указываем правила именования таблиц и столбцов,
-                        // чтобы они соответствовали правилам Spring
+            // Указываем правила именования таблиц и столбцов,
+            // чтобы они соответствовали правилам Spring
                         '&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy'
         }
     }

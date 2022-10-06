@@ -1,0 +1,3 @@
+-- INSERT INTO users VALUES (1, '2022-01-01 00:00:00', 'nik@io.com', 'Nik', 'Io', '12345');
+-- INSERT INTO users VALUES (2, '2022-01-01 00:00:00', 'yas@io.com', 'Yas', 'Io', '12345');
+-- INSERT INTO users VALUES (3, '2022-01-01 00:00:00', 'yan@io.com', 'Yan', 'Io', '12345');

@@ -15,6 +15,6 @@ lint-test:
 	./gradlew checkstyleTest
 
 clean:
-	rm *.db
+	rm *.db || true
 
 
