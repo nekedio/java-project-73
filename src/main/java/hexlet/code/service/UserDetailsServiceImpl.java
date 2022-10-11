@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("user"));
+        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("USER"));
 
         User user = repository.findByEmail(email).get();
 

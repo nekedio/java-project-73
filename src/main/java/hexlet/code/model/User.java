@@ -10,9 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
-import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.TemporalType.TIMESTAMP;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -89,6 +87,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", createdAt=" + createdAt + '}';
+        return "User{"
+                + "id=" + id
+                + ", firstName=" + firstName
+                + ", lastName=" + lastName
+                + ", email=" + email
+                + ", password=" + password
+                + ", createdAt=" + createdAt
+                + '}';
     }
 }

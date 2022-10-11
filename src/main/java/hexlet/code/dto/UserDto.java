@@ -53,7 +53,12 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" + "email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + '}';
+        return "UserDto{"
+                + "email=" + email
+                + ", firstName=" + firstName
+                + ", lastName=" + lastName
+                + ", password=" + password
+                + '}';
     }
 
 }

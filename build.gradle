@@ -12,7 +12,7 @@ group = 'hexlet.code'
 version '1.0-SNAPSHOT'
 
 application {
-    mainClass = 'hexlet.code.Application'
+    mainClass = 'hexlet.code.AppApplication'
 }
 
 repositories {
@@ -40,6 +40,9 @@ dependencies {
 
     //security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+
 
 }
 
