@@ -9,3 +9,4 @@ nohup.out
 *.mv.db
 *.trace.db
 
+node
