@@ -6,7 +6,8 @@
     xmlns:pro="http://www.liquibase.org/xml/ns/pro"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
-    <changeSet id="1" author="nekedio">
+
+<changeSet id="1" author="nekedio">
         <createTable tableName="users">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -18,5 +19,16 @@
             <column name="created_at" type="timestamp"/>
         </createTable>
     </changeSet>
+
+    <changeSet id="2" author="nekedio">
+        <createTable tableName="statuses">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column  name="name"  type="varchar(250)"/>
+            <column name="created_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
 

@@ -24,6 +24,9 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import hexlet.code.helper.JWTHelper;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.http.HttpMethod.DELETE;
+
 
 @Configuration
 @EnableWebSecurity
@@ -55,6 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 loginRequest,
                 new AntPathRequestMatcher(baseUrl + "/users", POST.toString()),
                 new AntPathRequestMatcher(baseUrl + "/users", GET.toString()),
+                //--------------
+                new AntPathRequestMatcher(baseUrl + "/statuses", POST.toString()),
+                new AntPathRequestMatcher(baseUrl + "/statuses", GET.toString()),
+                new AntPathRequestMatcher(baseUrl + "/statuses/**", GET.toString()),
+                new AntPathRequestMatcher(baseUrl + "/statuses/**", PUT.toString()),
+                new AntPathRequestMatcher(baseUrl + "/statuses/**", DELETE.toString()),
+                //--------------
                 new NegatedRequestMatcher(new AntPathRequestMatcher(baseUrl + "/**"))
         );
         this.userDetailsService = userDetailsService;

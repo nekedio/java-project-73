@@ -26,15 +26,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("")
+    public User createUser(@RequestBody @Valid UserDto userDto) {
+        return userService.createNewUser(userDto);
+    }
 
     @GetMapping("")
     public List<User> getUsers() {
         return this.userRepository.findAll();
-    }
-
-    @PostMapping("")
-    public User createUser(@RequestBody @Valid UserDto userDto) {
-        return userService.createNewUser(userDto);
     }
 
     @GetMapping("{id}")

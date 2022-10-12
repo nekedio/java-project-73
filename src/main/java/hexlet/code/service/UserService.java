@@ -25,13 +25,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(User userToUpdate, UserDto newUserDto) {
-        userToUpdate.setEmail(newUserDto.getEmail());
-        userToUpdate.setFirstName(newUserDto.getFirstName());
-        userToUpdate.setLastName(newUserDto.getLastName());
-        userToUpdate.setPassword(passwordEncoder.encode(newUserDto.getPassword()));
-        return userRepository.save(userToUpdate);
-
+    public User updateUser(User user, UserDto userDto) {
+        user.setEmail(userDto.getEmail());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        return userRepository.save(user);
     }
 
 }
