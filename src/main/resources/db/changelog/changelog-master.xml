@@ -1,34 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
-
-<changeSet id="1" author="nekedio">
-        <createTable tableName="users">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column  name="first_name"  type="varchar(250)"/>
-            <column  name="last_name"  type="varchar(250)"/>
-            <column  name="email"  type="varchar(250)"/>
-            <column  name="password"  type="varchar(250)"/>
-            <column name="created_at" type="timestamp"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="2" author="nekedio">
-        <createTable tableName="statuses">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column  name="name"  type="varchar(250)"/>
-            <column name="created_at" type="timestamp"/>
-        </createTable>
-    </changeSet>
-
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 </databaseChangeLog>
-

@@ -22,10 +22,15 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 //import static hexlet.code.controller.UserController.USER_CONTROLLER_PATH;
 import hexlet.code.helper.JWTHelper;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.http.HttpMethod.DELETE;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 
 
 @Configuration
@@ -59,11 +64,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 new AntPathRequestMatcher(baseUrl + "/users", POST.toString()),
                 new AntPathRequestMatcher(baseUrl + "/users", GET.toString()),
                 //--------------
+//                new AntPathRequestMatcher(baseUrl + "/users/**", GET.toString()),
                 new AntPathRequestMatcher(baseUrl + "/statuses", POST.toString()),
                 new AntPathRequestMatcher(baseUrl + "/statuses", GET.toString()),
                 new AntPathRequestMatcher(baseUrl + "/statuses/**", GET.toString()),
                 new AntPathRequestMatcher(baseUrl + "/statuses/**", PUT.toString()),
                 new AntPathRequestMatcher(baseUrl + "/statuses/**", DELETE.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/tasks/**", GET.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/tasks/**", POST.toString()),
                 //--------------
                 new NegatedRequestMatcher(new AntPathRequestMatcher(baseUrl + "/**"))
         );
@@ -98,6 +106,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .and().authorizeRequests().antMatchers("/h2console/**").permitAll() //for h2console
                 .anyRequest().authenticated()
                 .and()
+//                .exceptionHandling().authenticationEntryPoint(this::handleError)
+//                .and()
                 .addFilter(authenticationFilter)
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().disable()
@@ -107,5 +117,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.headers().frameOptions().disable(); // for h2console
     }
+
+//    private void handleError(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+//        response.sendError(HttpStatus.UNAUTHORIZED.value(), exception.getMessage());
+//    }
+
 
 }

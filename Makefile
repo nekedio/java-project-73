@@ -17,4 +17,7 @@ lint-test:
 clean:
 	rm *.db || true
 
+dependencies:
+	gradle dependencies --configuration runtimeClasspath
+
 
