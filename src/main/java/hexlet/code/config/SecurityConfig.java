@@ -64,12 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 new AntPathRequestMatcher(baseUrl + "/users", POST.toString()),
                 new AntPathRequestMatcher(baseUrl + "/users", GET.toString()),
                 //--------------
-//                new AntPathRequestMatcher(baseUrl + "/users/**", GET.toString()),
-                new AntPathRequestMatcher(baseUrl + "/statuses", POST.toString()),
-                new AntPathRequestMatcher(baseUrl + "/statuses", GET.toString()),
-                new AntPathRequestMatcher(baseUrl + "/statuses/**", GET.toString()),
-                new AntPathRequestMatcher(baseUrl + "/statuses/**", PUT.toString()),
-                new AntPathRequestMatcher(baseUrl + "/statuses/**", DELETE.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/labels/**", GET.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/statuses", POST.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/statuses", GET.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/statuses/**", GET.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/statuses/**", PUT.toString()),
+//                new AntPathRequestMatcher(baseUrl + "/statuses/**", DELETE.toString()),
 //                new AntPathRequestMatcher(baseUrl + "/tasks/**", GET.toString()),
 //                new AntPathRequestMatcher(baseUrl + "/tasks/**", POST.toString()),
                 //--------------
