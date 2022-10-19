@@ -1,12 +1,17 @@
 package hexlet.code.service;
 
 import hexlet.code.dto.TaskDto;
+import hexlet.code.model.Label;
 import hexlet.code.model.Status;
 import hexlet.code.model.Task;
 import hexlet.code.model.User;
+import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.StatusRepository;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +30,20 @@ public class TaskService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private LabelRepository labelRepository;
+
     public Task createdNewTask(TaskDto taskDto) {
         Task task = new Task();
 
         User executor = userRepository.findById(taskDto.getExecutorId()).get();
+
+        Set<Label> labels = new HashSet<>();
+
+        if (taskDto.getLabelIds() != null) {
+            List<Label> newLabels = labelRepository.findAllById(taskDto.getLabelIds());
+            labels.addAll(newLabels);
+        }
 
         String login = userService.getCurrentUserName();
         User author = userRepository.findByEmail(login).get();
@@ -39,6 +54,7 @@ public class TaskService {
         task.setDescription(taskDto.getDescription());
         task.setExecutor(executor);
         task.setTaskStatus(status);
+        task.setLabels(labels);
         task.setAuthor(author);
 
         return taskRepository.save(task);
@@ -49,12 +65,20 @@ public class TaskService {
         User executor = userRepository.findById(taskDto.getExecutorId()).get();
         Status status = statusRepository.findById(taskDto.getTaskStatusId()).get();
 
+        Set<Label> labels = new HashSet<>();
+
+        if (taskDto.getLabelIds() != null) {
+            List<Label> newLabels = labelRepository.findAllById(taskDto.getLabelIds());
+            labels.addAll(newLabels);
+        }
+
         task.setName(taskDto.getName());
         task.setDescription(taskDto.getDescription());
         task.setExecutor(executor);
         task.setTaskStatus(status);
+        task.setLabels(labels);
 
-        return task;
+        return taskRepository.save(task);
     }
 
     public void deleteTask(Task task) {
