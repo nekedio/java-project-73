@@ -67,8 +67,8 @@ public class TestUtils {
     private JWTHelper jwtHelper;
 
     public void removeAll() {
-        labelRepository.deleteAll();
         taskRepository.deleteAll();
+        labelRepository.deleteAll();
         statusRepository.deleteAll();
         userRepository.deleteAll();
     }
