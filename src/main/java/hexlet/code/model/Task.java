@@ -13,9 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
 import javax.validation.constraints.NotBlank;
-import liquibase.pro.packaged.id;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
 import org.springframework.lang.Nullable;
 
 @Entity
@@ -44,7 +42,7 @@ public class Task {
     private User executor;
 
     @ManyToMany
-    Set<Label> labels;
+    private Set<Label> labels;
 
     @CreationTimestamp
     @Temporal(TIMESTAMP)

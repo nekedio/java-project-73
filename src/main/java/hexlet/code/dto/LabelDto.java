@@ -8,6 +8,13 @@ public class LabelDto {
     @NotBlank
     private String name;
 
+    public LabelDto() {
+    }
+
+    public LabelDto(String name) {
+        this.name = name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

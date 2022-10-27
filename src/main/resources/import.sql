@@ -13,11 +13,11 @@ INSERT INTO tasks (id, created_at, description, name, author_id, executor_id, ta
 INSERT INTO tasks (id, created_at, description, name, author_id, executor_id, task_status_id) VALUES (4, '2022-01-01 00:00:00', 'описание4', 'задача4', 3, 1, 4);
 INSERT INTO tasks (id, created_at, description, name, author_id, executor_id, task_status_id) VALUES (5, '2022-01-01 00:00:00', 'описание4', 'задача4', 3, 1, 4);
 
-INSERT INTO labels (id, created_at, name) VALUES (1, '2022-01-01 00:00:00', 'баг');
-INSERT INTO labels (id, created_at, name) VALUES (2, '2022-01-01 00:00:00', 'фича');
-INSERT INTO labels (id, created_at, name) VALUES (3, '2022-01-01 00:00:00', 'рефакторинг');
+-- INSERT INTO labels (id, created_at, name) VALUES (1, '2022-01-01 00:00:00', 'баг');
+-- INSERT INTO labels (id, created_at, name) VALUES (2, '2022-01-01 00:00:00', 'фича');
+-- INSERT INTO labels (id, created_at, name) VALUES (3, '2022-01-01 00:00:00', 'рефакторинг');
 
-INSERT INTO tasks_labels (task_id, labels_id) VALUES (1, 1);
-INSERT INTO tasks_labels (task_id, labels_id) VALUES (2, 2);
-INSERT INTO tasks_labels (task_id, labels_id) VALUES (3, 3);
+-- INSERT INTO tasks_labels (task_id, labels_id) VALUES (1, 1);
+-- INSERT INTO tasks_labels (task_id, labels_id) VALUES (2, 2);
+-- INSERT INTO tasks_labels (task_id, labels_id) VALUES (3, 3);
 

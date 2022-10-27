@@ -6,7 +6,7 @@ full-check: lint test run
 lint: lint-main lint-test
 
 test:
-	gradle test
+	./gradlew test
 
 lint-main:
 	./gradlew checkstyleMain
@@ -16,6 +16,7 @@ lint-test:
 
 clean:
 	rm *.db || true
+	./gradlew clean
 
 dependencies:
 	gradle dependencies --configuration runtimeClasspath

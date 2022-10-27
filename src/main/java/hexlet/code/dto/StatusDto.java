@@ -2,7 +2,6 @@ package hexlet.code.dto;
 
 import javax.validation.constraints.NotBlank;
 
-
 public class StatusDto {
 
     @NotBlank
@@ -16,10 +15,15 @@ public class StatusDto {
         return name;
     }
 
+    public StatusDto() {
+    }
+
+    public StatusDto(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "StatusDto{" + "name=" + name + '}';
     }
-
-    
 }

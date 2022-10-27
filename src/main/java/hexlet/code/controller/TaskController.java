@@ -5,11 +5,12 @@ import hexlet.code.dto.TaskDto;
 import hexlet.code.model.Task;
 import hexlet.code.model.User;
 import hexlet.code.repository.TaskRepository;
+import hexlet.code.repository.UserRepository;
 import hexlet.code.service.TaskService;
-import java.util.List;
-import javax.websocket.server.PathParam;
+import hexlet.code.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import static org.springframework.http.HttpStatus.CREATED;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,10 +31,15 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("")
     public Iterable<Task> getTasksByFilter(
-            @QuerydslPredicate(root = Task.class) Predicate predicate
-    ) {
+            @QuerydslPredicate(root = Task.class) Predicate predicate) {
         return taskRepository.findAll(predicate);
     }
 
@@ -43,10 +49,12 @@ public class TaskController {
     }
 
     @PostMapping("")
+    @ResponseStatus(CREATED)
     public Task createdTask(@RequestBody TaskDto taskDto) {
+        String login = userService.getCurrentUserName();
+        User author = userRepository.findByEmail(login).get();
 
-//        return "qwe";
-        return taskService.createdNewTask(taskDto);
+        return taskService.createdNewTask(author, taskDto);
     }
 
     @PutMapping("{id}")

@@ -13,6 +13,14 @@ public class LoginDto {
     @Size(min = 3, max = 22)
     private String password;
 
+    public LoginDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public LoginDto() {
+    }
+
     public String getEmail() {
         return email;
     }
@@ -33,5 +41,4 @@ public class LoginDto {
     public String toString() {
         return "LoginDto{" + "email=" + email + ", password=" + password + '}';
     }
-
 }

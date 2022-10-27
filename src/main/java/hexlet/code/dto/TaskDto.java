@@ -1,10 +1,6 @@
 package hexlet.code.dto;
 
-import hexlet.code.model.Label;
-import hexlet.code.model.Status;
-import hexlet.code.model.User;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import org.springframework.lang.Nullable;
@@ -23,6 +19,22 @@ public class TaskDto {
     private Long executorId;
 
     private List<Long> labelIds;
+
+    public TaskDto() {
+    }
+
+    public TaskDto(
+            String name,
+            String description,
+            Long taskStatusId,
+            Long executorId) {
+//            , List<Long> labelIds) {
+        this.name = name;
+        this.description = description;
+        this.taskStatusId = taskStatusId;
+        this.executorId = executorId;
+//        this.labelIds = labelIds;
+    }
 
     public String getName() {
         return name;
@@ -43,8 +55,6 @@ public class TaskDto {
     public List<Long> getLabelIds() {
         return labelIds;
     }
-
-
 
     public void setName(String name) {
         this.name = name;
@@ -68,12 +78,8 @@ public class TaskDto {
 
     @Override
     public String toString() {
-        return "TaskDto{" + "name=" + name + ", description=" + description + ", taskStatusId=" + taskStatusId + ", executorId=" + executorId + ", labelIds=" + labelIds + '}';
+        return "TaskDto{" + "name=" + name + ", description=" + description
+                + ", taskStatusId=" + taskStatusId + ", executorId=" + executorId + ", labelIds=" + labelIds + '}';
     }
-
-
-
-
-    
 
 }

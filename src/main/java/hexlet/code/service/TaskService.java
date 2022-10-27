@@ -33,7 +33,7 @@ public class TaskService {
     @Autowired
     private LabelRepository labelRepository;
 
-    public Task createdNewTask(TaskDto taskDto) {
+    public Task createdNewTask(User author, TaskDto taskDto) {
         Task task = new Task();
 
         User executor = userRepository.findById(taskDto.getExecutorId()).get();
@@ -44,9 +44,6 @@ public class TaskService {
             List<Label> newLabels = labelRepository.findAllById(taskDto.getLabelIds());
             labels.addAll(newLabels);
         }
-
-        String login = userService.getCurrentUserName();
-        User author = userRepository.findByEmail(login).get();
 
         Status status = statusRepository.findById(taskDto.getTaskStatusId()).get();
 

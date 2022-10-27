@@ -1,6 +1,7 @@
 package hexlet.code.controller;
 
 import static org.hamcrest.Matchers.equalTo;
+import org.junit.jupiter.api.Test;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -18,8 +19,8 @@ public class WelcomeControllerTest {
     @Autowired
     private MockMvc mvc;
 
-//    @Test
-    public void getHello() throws Exception {
+    @Test
+    public void getWelcome() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/welcome").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Welcome to Spring")));
