@@ -21,4 +21,5 @@ clean:
 dependencies:
 	gradle dependencies --configuration runtimeClasspath
 
-
+generate-openapi:
+	./gradlew clean generateOpenApiDocs

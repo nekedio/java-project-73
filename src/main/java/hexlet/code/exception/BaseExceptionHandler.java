@@ -47,8 +47,7 @@ public class BaseExceptionHandler {
         return exception.getMessage();
     }
 
-
-     @ResponseStatus(INTERNAL_SERVER_ERROR)
+    @ResponseStatus(INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public String generalExceptionHandler(Exception exception) {
         return exception.getMessage();
