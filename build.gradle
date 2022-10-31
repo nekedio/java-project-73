@@ -160,7 +160,3 @@ installFrontend {
 
 processResources.dependsOn assembleFrontend
 // *****************************************************************************
-
-//heroku
-task stage(dependsOn: [clean, installDist])
-installDist.mustRunAfter clean
