@@ -1,5 +1,8 @@
 path = $(shell pwd)
 
+build:
+	./gradlew clean build
+
 run: clean
 	./gradlew bootRun --args='--spring.profiles.active=dev'
 
