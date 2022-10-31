@@ -83,6 +83,7 @@ openApi {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 testlogger {
