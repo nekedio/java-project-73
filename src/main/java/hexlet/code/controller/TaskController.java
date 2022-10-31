@@ -1,6 +1,8 @@
 package hexlet.code.controller;
 
 import com.querydsl.core.types.Predicate;
+import com.rollbar.notifier.Rollbar;
+import hexlet.code.config.RollbarConfig;
 import hexlet.code.dto.TaskDto;
 import hexlet.code.model.Task;
 import hexlet.code.model.User;
@@ -54,6 +56,9 @@ public class TaskController {
     public Iterable<Task> getTasksByFilter(
             @Parameter(description = "Get parameters for filtering")
             @QuerydslPredicate(root = Task.class) Predicate predicate) {
+
+        Rollbar rollbar = new RollbarConfig().rollbar();
+        rollbar.debug("@@@Here is some debug message @@@");
         return taskRepository.findAll(predicate);
     }
 

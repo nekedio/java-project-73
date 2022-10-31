@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'jacoco'
     id 'org.springframework.boot' version '2.6.13'
     id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id 'org.liquibase.gradle' version '2.0.4'
@@ -10,6 +11,8 @@ plugins {
     //swagger
     id 'org.springdoc.openapi-gradle-plugin' version '1.3.3'
     id 'com.github.johnrengelman.processes' version '0.5.0'
+
+    //id 'org.siouan.frontend-jdk11' version '6.0.0'
 }
 
 group = 'hexlet.code'
@@ -29,20 +32,24 @@ compileJava {
     options.encoding = 'UTF-8'
 }
 
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
 
 dependencies {
     //spring, spring-test
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    //testImplementation 'org.springframework.boot:spring-boot-starter-security'
-    //testImplementation 'org.springframework.security:spring-security-test:5.5.1'
-    //testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    //testImplementation 'com.tobedevoured.modelcitizen:spring:0.8.3'
-
-
-
-
 
     // db
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -64,6 +71,9 @@ dependencies {
 
     //swagger
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.12'
+
+    //rollbar
+    implementation 'com.rollbar:rollbar-spring-boot-webmvc:1.8.1'
 }
 
 openApi {

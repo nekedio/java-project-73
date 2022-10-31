@@ -1,5 +1,6 @@
 package hexlet.code.controller;
 
+import hexlet.code.utils.TestUtils;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.jupiter.api.Test;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -8,21 +9,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.ResultActions;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class WelcomeControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    private TestUtils testUtils;
 
     @Test
     public void getWelcome() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/welcome").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Welcome to Spring")));
+        ResultActions response = testUtils.makeRequestNotAuth(
+                get("/welcome")
+        );
+
+        response.andExpect(status().isOk());
+        response.andExpect(content().string(equalTo("Welcome to Spring")));
+
+    }
+
+    @Test
+    public void getHome() throws Exception {
+
+        ResultActions response = testUtils.makeRequestNotAuth(
+                get("/")
+        );
+
+        response.andExpect(status().isOk());
     }
 }
