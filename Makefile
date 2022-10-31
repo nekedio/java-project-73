@@ -29,6 +29,24 @@ dependencies:
 generate-openapi:
 	./gradlew clean generateOpenApiDocs
 
+setup:
+	gradle wrapper --gradle-version 7.3
+
+start-prod:
+	./gradlew bootRun --args='--spring.profiles.active=prod'
+
+install:
+	./gradlew installDist
+
+start-dist:
+	./build/install/app/bin/app
+
+generate-migrations:
+	gradle diffChangeLog
+
+db-migrate:
+	./gradlew update
+
 report: test
 	./gradlew jacocoTestReport
 	@echo "\n\nOpen the following file in any browser:"
