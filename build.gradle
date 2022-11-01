@@ -1,4 +1,5 @@
 plugins {
+    id 'com.github.ben-manes.versions' version '0.42.0'
     id 'application'
     id 'jacoco'
     id 'org.springframework.boot' version '2.6.13'
@@ -123,9 +124,7 @@ liquibase {
     }
 }
 
-// для хероку
-task stage(dependsOn: [clean, installDist])
-installDist.mustRunAfter clean
+
 
 
 // Сборка фронтенда.
@@ -160,3 +159,7 @@ installFrontend {
 
 processResources.dependsOn assembleFrontend
 // *****************************************************************************
+
+// для хероку
+task stage(dependsOn: [clean, installDist])
+installDist.mustRunAfter clean
