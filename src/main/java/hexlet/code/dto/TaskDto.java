@@ -3,7 +3,6 @@ package hexlet.code.dto;
 import java.util.List;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
