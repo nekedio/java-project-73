@@ -31,7 +31,6 @@ public class Task {
     @NotBlank
     private String name;
 
-    @Nullable
     @Lob
     private String description;
 
@@ -41,7 +40,6 @@ public class Task {
     @ManyToOne
     private User author;
 
-    @Nullable
     @ManyToOne
     private User executor;
 
