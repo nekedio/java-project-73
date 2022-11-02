@@ -1,32 +1,18 @@
 package hexlet.code.dto;
 
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LabelDto {
 
     @NotBlank
     private String name;
-
-    public LabelDto() {
-    }
-
-    public LabelDto(String name) {
-        this.name = name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "LabelDto{" + "name=" + name + '}';
-    }
-
 
 }

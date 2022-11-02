@@ -3,7 +3,15 @@ package hexlet.code.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginDto {
 
     @Email
@@ -13,32 +21,4 @@ public class LoginDto {
     @Size(min = 3, max = 22)
     private String password;
 
-    public LoginDto(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public LoginDto() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginDto{" + "email=" + email + ", password=" + password + '}';
-    }
 }

@@ -12,8 +12,6 @@ plugins {
     //swagger
     id 'org.springdoc.openapi-gradle-plugin' version '1.3.3'
     id 'com.github.johnrengelman.processes' version '0.5.0'
-
-    //id 'org.siouan.frontend-jdk11' version '6.0.0'
 }
 
 group = 'hexlet.code'
@@ -56,6 +54,10 @@ dependencies {
     //spring, spring-test
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     // db
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

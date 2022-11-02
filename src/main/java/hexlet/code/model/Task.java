@@ -13,11 +13,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
 import javax.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "tasks")
+@Getter
+@Setter
 public class Task {
 
     @Id
@@ -47,69 +51,4 @@ public class Task {
     @CreationTimestamp
     @Temporal(TIMESTAMP)
     private Date createdAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Status getTaskStatus() {
-        return taskStatus;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public User getExecutor() {
-        return executor;
-    }
-
-    public Set<Label> getLabels() {
-        return labels;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setTaskStatus(Status taskStatus) {
-        this.taskStatus = taskStatus;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public void setExecutor(User executor) {
-        this.executor = executor;
-    }
-
-    public void setLabels(Set<Label> labels) {
-        this.labels = labels;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
 }
