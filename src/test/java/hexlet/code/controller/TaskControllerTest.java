@@ -26,8 +26,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
@@ -143,20 +143,20 @@ public class TaskControllerTest {
                 user.getId()
         );
 
-//        ResultActions response = testUtils.makeRequestAuth(
-//                put("/api/tasks/" + defaultTask.getId())
-//                        .content(asJson(newTaskDto))
-//                        .contentType(APPLICATION_JSON),
-//                testUtils.getDefaultUserDto().getEmail()
-//        );
-//
-//        response.andExpect(status().isOk());
-//        assertEquals(countTaskBefore, taskRepository.count());
-//
-//        Task newTask = taskRepository.findById(defaultTask.getId()).get();
-//
-//        assertEquals(newTask.getName(), newTaskDto.getName());
-//        assertEquals(newTask.getDescription(), newTaskDto.getDescription());
+        ResultActions response = testUtils.makeRequestAuth(
+                put("/api/tasks/" + defaultTask.getId())
+                        .content(asJson(newTaskDto))
+                        .contentType(APPLICATION_JSON),
+                testUtils.getDefaultUserDto().getEmail()
+        );
+
+        response.andExpect(status().isOk());
+        assertEquals(countTaskBefore, taskRepository.count());
+
+        Task newTask = taskRepository.findById(defaultTask.getId()).get();
+
+        assertEquals(newTask.getName(), newTaskDto.getName());
+        assertEquals(newTask.getDescription(), newTaskDto.getDescription());
     }
 
      public void deleteTask() throws Exception {

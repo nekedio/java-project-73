@@ -2,44 +2,15 @@ package hexlet.code.service;
 
 import hexlet.code.dto.UserDto;
 import hexlet.code.model.User;
-import hexlet.code.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    User createNewUser(UserDto userDto);
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    User updateUser(User user, UserDto userDto);
 
-    public User createNewUser(UserDto userDto) {
-        User user = new User();
-        user.setEmail(userDto.getEmail());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        return userRepository.save(user);
-    }
+    String getCurrentUserName();
 
-    public User updateUser(User user, UserDto userDto) {
-        user.setEmail(userDto.getEmail());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        return userRepository.save(user);
-    }
-
-    public String getCurrentUserName() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
-    public User getCurrentUser() {
-        return userRepository.findByEmail(getCurrentUserName()).get();
-    }
+    User getCurrentUser();
 
 }
