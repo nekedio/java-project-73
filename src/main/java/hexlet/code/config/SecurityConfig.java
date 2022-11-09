@@ -19,7 +19,7 @@ import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import hexlet.code.helper.JWTHelper;
-import hexlet.code.service.UserDetailsServiceImpl;
+import hexlet.code.service.impl.UserDetailsServiceImpl;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 

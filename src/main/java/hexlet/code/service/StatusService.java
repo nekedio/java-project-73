@@ -5,7 +5,7 @@ import hexlet.code.model.Status;
 
 public interface StatusService {
 
-    public Status createNewStatus(StatusDto statusDto);
+    Status createNewStatus(StatusDto statusDto);
 
-    public Status updateStatus(Long id, StatusDto statusDto);
+    Status updateStatus(Long id, StatusDto statusDto);
 }

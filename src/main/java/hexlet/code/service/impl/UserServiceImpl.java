@@ -1,8 +1,9 @@
-package hexlet.code.service;
+package hexlet.code.service.impl;
 
 import hexlet.code.dto.UserDto;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
+import hexlet.code.service.UserService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
-    final private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    final private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    final private UserRepository repository;
+    private final UserRepository repository;
 
     @Override
     public User createNewUser(UserDto userDto) {

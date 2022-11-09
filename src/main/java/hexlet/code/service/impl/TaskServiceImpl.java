@@ -1,4 +1,4 @@
-package hexlet.code.service;
+package hexlet.code.service.impl;
 
 import hexlet.code.dto.TaskDto;
 import hexlet.code.model.Label;
@@ -9,6 +9,8 @@ import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.StatusRepository;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
+import hexlet.code.service.TaskService;
+import hexlet.code.service.UserService;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,19 +23,19 @@ import org.springframework.stereotype.Service;
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
-    final private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    final private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    final private StatusRepository statusRepository;
+    private final StatusRepository statusRepository;
 
     @Autowired
-    final private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    final private LabelRepository labelRepository;
+    private final LabelRepository labelRepository;
 
     @Override
     public Task createdNewTask(User author, TaskDto taskDto) {

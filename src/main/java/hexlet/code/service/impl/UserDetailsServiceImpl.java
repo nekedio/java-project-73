@@ -1,4 +1,4 @@
-package hexlet.code.service;
+package hexlet.code.service.impl;
 
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    final private UserRepository repository;
+    private final UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -6,9 +6,9 @@ import hexlet.code.model.User;
 
 public interface TaskService {
 
-    public Task createdNewTask(User author, TaskDto taskDto);
+    Task createdNewTask(User author, TaskDto taskDto);
 
-    public Task updateTask(Long id, TaskDto taskDto);
+    Task updateTask(Long id, TaskDto taskDto);
 
-    public void deleteTask(Long id);
+    void deleteTask(Long id);
 }
