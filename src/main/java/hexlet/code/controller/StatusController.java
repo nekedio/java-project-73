@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.List;
+import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.CREATED;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,13 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/statuses")
 @SecurityRequirement(name = "javainuseapi")
+@AllArgsConstructor
 public class StatusController {
 
     @Autowired
-    private StatusService statusService;
+    private final StatusService statusService;
 
     @Autowired
-    private StatusRepository statusRepository;
+    private final StatusRepository statusRepository;
 
     @Operation(summary = "Create new status")
     @ApiResponse(
@@ -40,7 +43,7 @@ public class StatusController {
     )
     @PostMapping("")
     @ResponseStatus(CREATED)
-    public Status createStatus(@RequestBody StatusDto statusDto) {
+    public Status createStatus(@RequestBody @Valid StatusDto statusDto) {
         return statusService.createNewStatus(statusDto);
     }
 
@@ -91,10 +94,9 @@ public class StatusController {
             @Parameter(description = "Id of status to be updated")
             @PathVariable() Long id,
             @Parameter(description = "Status data to update")
-            @RequestBody StatusDto stausDto
+            @RequestBody @Valid StatusDto stausDto
     ) {
-        Status status = statusRepository.findById(id).get();
-        return statusService.updateStatus(status, stausDto);
+        return statusService.updateStatus(id, stausDto);
     }
 
     @Operation(summary = "Delete specific status by his id")
@@ -113,8 +115,7 @@ public class StatusController {
             @Parameter(description = "Id of status to be deleted")
             @PathVariable() Long id
     ) {
-        Status status = statusRepository.findById(id).get();
-        statusRepository.delete(status);
+        statusRepository.deleteById(id);
     }
 
 }

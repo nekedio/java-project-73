@@ -13,7 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,6 +24,9 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "tasks")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
 
     @Id

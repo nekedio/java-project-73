@@ -7,7 +7,7 @@ public interface UserService {
 
     User createNewUser(UserDto userDto);
 
-    User updateUser(User user, UserDto userDto);
+    User updateUser(Long id, UserDto userDto);
 
     String getCurrentUserName();
 

@@ -7,6 +7,7 @@ import hexlet.code.dto.LabelDto;
 import hexlet.code.model.Label;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.service.LabelService;
+import hexlet.code.service.LabelServiceImpl;
 import hexlet.code.utils.TestUtils;
 import static hexlet.code.utils.TestUtils.asJson;
 import java.util.List;

@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -31,19 +33,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/tasks")
 @SecurityRequirement(name = "javainuseapi")
+@AllArgsConstructor
 public class TaskController {
 
     @Autowired
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    private TaskService taskService;
+    private final TaskService taskService;
 
     @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Operation(summary = "Get list of all tasks")
     @ApiResponses(value = {
@@ -92,7 +95,7 @@ public class TaskController {
     @ResponseStatus(CREATED)
     public Task createdTask(
             @Parameter(description = "Task data to save")
-            @RequestBody TaskDto taskDto
+            @RequestBody @Valid TaskDto taskDto
     ) {
         String login = userService.getCurrentUserName();
         User author = userRepository.findByEmail(login).get();
@@ -116,10 +119,8 @@ public class TaskController {
             @Parameter(description = "Id of task to be updated")
             @PathVariable Long id,
             @Parameter(description = "Task data to update")
-            @RequestBody TaskDto taskDto) {
-        Task task = taskRepository.findById(id).get();
-
-        return taskService.updateTask(task, taskDto);
+            @RequestBody @Valid TaskDto taskDto) {
+        return taskService.updateTask(id, taskDto);
     }
 
     @Operation(summary = "Delete specific task by his id")
@@ -138,7 +139,6 @@ public class TaskController {
             @Parameter(description = "Id of task to be deleted")
             @PathVariable Long id
     ) {
-        Task task = taskRepository.findById(id).get();
-        taskService.deleteTask(task);
+        taskService.deleteTask(id);
     }
 }

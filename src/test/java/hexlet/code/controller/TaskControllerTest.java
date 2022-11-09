@@ -181,13 +181,26 @@ public class TaskControllerTest {
         return statusService.createNewStatus(statusDto);
     }
 
-    private Task createTask(User user, Status status, String name, String description) {
+    private Task createTask(User user, Status status, String name, String description) throws Exception {
         TaskDto taskDto = new TaskDto(
                 name,
                 description,
                 status.getId(),
                 user.getId()
         );
-        return taskService.createdNewTask(user, taskDto);
+
+        ResultActions response = testUtils.makeRequestAuth(
+                post("/api/tasks")
+                        .content(asJson(taskDto))
+                        .contentType(APPLICATION_JSON),
+                testUtils.getDefaultUserDto().getEmail()
+        );
+
+        String json = response.andReturn().getResponse().getContentAsString();
+
+        Task task = TestUtils.fromJson(json, new TypeReference<>() {
+        });
+
+        return taskRepository.findById(task.getId()).get();
     }
 }

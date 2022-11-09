@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.List;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.CREATED;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,13 +27,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/users")
+@AllArgsConstructor
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private static final String ONLY_OWNER_BY_ID = """
+            @userRepository.findById(#id).get().getEmail() == authentication.getName()
+        """;
 
     @Operation(summary = "Create new user")
     @ApiResponse(
@@ -93,14 +99,13 @@ public class UserController {
     })
     @SecurityRequirement(name = "javainuseapi")
     @PatchMapping("{id}")
-    @PreAuthorize("@userRepository.findById(#id).get().getEmail() == authentication.getName()")
+    @PreAuthorize(ONLY_OWNER_BY_ID)
     public User updateUser(
             @Parameter(description = "Id of user to be updated")
             @PathVariable Long id,
             @Parameter(description = "User data to update")
-            @RequestBody UserDto newUserDto) {
-        User oldUser = this.userRepository.findById(id).get();
-        return this.userService.updateUser(oldUser, newUserDto);
+            @RequestBody @Valid UserDto userDto) {
+        return this.userService.updateUser(id, userDto);
     }
 
     @Operation(summary = "Delete specific user by his id")
@@ -116,12 +121,11 @@ public class UserController {
     })
     @SecurityRequirement(name = "javainuseapi")
     @DeleteMapping("{id}")
-    @PreAuthorize("@userRepository.findById(#id).get().getEmail() == authentication.getName()")
+    @PreAuthorize(ONLY_OWNER_BY_ID)
     public void deleteUser(
             @Parameter(description = "Id of user to be deleted")
             @PathVariable Long id) {
-        User user = this.userRepository.findById(id).get();
-        this.userRepository.delete(user);
+        this.userRepository.deleteById(id);
     }
 
 }

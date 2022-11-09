@@ -11,7 +11,10 @@ import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,6 +22,9 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "statuses")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Status {
 
     @Id

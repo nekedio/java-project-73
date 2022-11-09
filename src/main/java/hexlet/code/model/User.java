@@ -12,13 +12,19 @@ import javax.persistence.Temporal;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import static javax.persistence.TemporalType.TIMESTAMP;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
