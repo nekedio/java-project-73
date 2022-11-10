@@ -87,19 +87,12 @@ public class TestUtils {
 
     public User registerDefaultUser() throws Exception {
 
-//        return registerUser(defaultUserDto);
         return userService.createNewUser(defaultUserDto);
     }
 
     public User registerUser(UserDto userDto) throws Exception {
 
-//        final var request = post("/api/users")
-//                .content(asJson(userDto))
-//                .contentType(APPLICATION_JSON);
-//
-//        return mockMvc.perform(request);
         return userService.createNewUser(userDto);
-
     }
 
     public ResultActions makeRequestAuth(

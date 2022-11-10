@@ -1,6 +1,6 @@
 package hexlet.code.dto;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class TaskDto {
     @Nullable
     private Long executorId;
 
-    private List<Long> labelIds;
+    private Set<Long> labelIds;
 
     public TaskDto(
             String name,

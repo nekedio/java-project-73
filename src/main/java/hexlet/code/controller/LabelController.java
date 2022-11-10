@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.CREATED;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class LabelController {
 
-    @Autowired
     private final LabelService labelService;
 
-    @Autowired
     private final LabelRepository labelRepository;
 
     @Operation(summary = "Create new label")
@@ -98,7 +95,6 @@ public class LabelController {
             @PathVariable() Long id,
             @Parameter(description = "Label data to update")
             @RequestBody @Valid LabelDto labelDto) {
-//       ! Label label = labelRepository.findById(id).get();
         return labelService.updateLabel(id, labelDto);
     }
 
@@ -118,8 +114,6 @@ public class LabelController {
             @Parameter(description = "Id of label to be deleted")
             @PathVariable() Long id
     ) {
-//      !  Label label = labelRepository.findById(id).get();
-//        labelRepository.delete(label);
         labelRepository.deleteById(id);
     }
 }

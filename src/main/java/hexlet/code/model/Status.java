@@ -40,4 +40,7 @@ public class Status {
     @Temporal(TIMESTAMP)
     private Date createdAt;
 
+    public Status(Long id) {
+        this.id = id;
+    }
 }

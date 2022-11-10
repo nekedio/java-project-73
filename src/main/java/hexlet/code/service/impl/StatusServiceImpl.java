@@ -5,14 +5,12 @@ import hexlet.code.model.Status;
 import hexlet.code.repository.StatusRepository;
 import hexlet.code.service.StatusService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class StatusServiceImpl implements StatusService {
 
-    @Autowired
     private final StatusRepository statusRepository;
 
     @Override

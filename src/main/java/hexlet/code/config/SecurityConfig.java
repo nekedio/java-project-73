@@ -5,7 +5,6 @@ import hexlet.code.filter.JWTAuthorizationFilter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,7 +18,7 @@ import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import hexlet.code.helper.JWTHelper;
-import hexlet.code.service.impl.UserDetailsServiceImpl;
+import hexlet.code.service.UserService;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
@@ -39,13 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // - все запросы НЕ начинающиеся на '/api'
     private final RequestMatcher publicUrls;
     private final RequestMatcher loginRequest;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final JWTHelper jwtHelper;
 
     public SecurityConfig(
             @Value("${base-url}") final String baseUrl,
-            final UserDetailsServiceImpl userDetailsService,
+            final UserService userDetailsService,
             final PasswordEncoder passwordEncoder,
             final JWTHelper jwtHelper) {
         this.loginRequest = new AntPathRequestMatcher(baseUrl + LOGIN, POST.toString());
@@ -58,12 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
         this.jwtHelper = jwtHelper;
-    }
-
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder);
     }
 
     @Override

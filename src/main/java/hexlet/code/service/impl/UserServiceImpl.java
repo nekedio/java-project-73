@@ -6,7 +6,6 @@ import hexlet.code.repository.UserRepository;
 import hexlet.code.service.UserService;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,13 +18,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     private final UserRepository repository;
 
     @Override

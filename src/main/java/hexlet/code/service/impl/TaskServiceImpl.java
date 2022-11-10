@@ -11,30 +11,25 @@ import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.service.TaskService;
 import hexlet.code.service.UserService;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-    @Autowired
     private final TaskRepository taskRepository;
 
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
     private final StatusRepository statusRepository;
 
-    @Autowired
     private final UserService userService;
 
-    @Autowired
     private final LabelRepository labelRepository;
 
     @Override
@@ -77,14 +72,21 @@ public class TaskServiceImpl implements TaskService {
 
     private Task fromDto(TaskDto taskDto) {
         User author = userService.getCurrentUser();
-        User executor = userRepository.findById(taskDto.getExecutorId()).get();
-        Status status = statusRepository.findById(taskDto.getTaskStatusId()).get();
 
-        Set<Label> labels = new HashSet<>();
-        if (taskDto.getLabelIds() != null) {
-            List<Label> newLabels = labelRepository.findAllById(taskDto.getLabelIds());
-            labels.addAll(newLabels);
-        }
+        final User executor = Optional.ofNullable(taskDto.getExecutorId())
+                .map(User::new)
+                .orElse(null);
+
+        final Status status = Optional.ofNullable(taskDto.getTaskStatusId())
+                .map(Status::new)
+                .orElse(null);
+
+        final Set<Label> labels = Optional.ofNullable(taskDto.getLabelIds())
+                .orElse(Set.of())
+                .stream()
+                .filter(Objects::nonNull)
+                .map(Label::new)
+                .collect(Collectors.toSet());
 
         return Task.builder()
                 .name(taskDto.getName())

@@ -17,9 +17,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import static org.springframework.http.HttpStatus.CREATED;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,17 +36,17 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class TaskController {
 
-    @Autowired
     private final TaskRepository taskRepository;
 
-    @Autowired
     private final TaskService taskService;
 
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
     private final UserService userService;
+
+    private static final String ONLY_OWNER_BY_ID = """
+            @taskRepository.findById(#id).get().getAuthor().getId().toString() == authentication.getName()
+        """;
 
     @Operation(summary = "Get list of all tasks")
     @ApiResponses(value = {
@@ -135,6 +135,7 @@ public class TaskController {
         )
     })
     @DeleteMapping("{id}")
+    @PreAuthorize(ONLY_OWNER_BY_ID)
     public void deleteTask(
             @Parameter(description = "Id of task to be deleted")
             @PathVariable Long id
