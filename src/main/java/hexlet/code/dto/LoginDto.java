@@ -14,6 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginDto {
 
+    private String firstName;
+
+    private String lastName;
+
     @Email
     @NotBlank
     private String email;
@@ -21,4 +25,8 @@ public class LoginDto {
     @Size(min = 3, max = 22)
     private String password;
 
+    public LoginDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

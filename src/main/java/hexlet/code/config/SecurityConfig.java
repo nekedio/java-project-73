@@ -38,8 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // - все запросы НЕ начинающиеся на '/api'
     private final RequestMatcher publicUrls;
     private final RequestMatcher loginRequest;
-    private final UserService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
     private final JWTHelper jwtHelper;
 
     public SecurityConfig(
@@ -54,8 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 new AntPathRequestMatcher(baseUrl + "/users", GET.toString()),
                 new NegatedRequestMatcher(new AntPathRequestMatcher(baseUrl + "/**"))
         );
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
         this.jwtHelper = jwtHelper;
     }
 

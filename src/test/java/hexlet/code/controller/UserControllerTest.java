@@ -78,6 +78,30 @@ public class UserControllerTest {
     }
 
     @Test
+    public void login2() throws Exception {
+        testUtils.registerDefaultUser();
+
+        UserDto userDto = testUtils.getDefaultUserDto();
+
+        final LoginDto loginDto = new LoginDto(
+                userDto.getEmail(),
+                userDto.getPassword()
+        );
+
+        ResultActions response = testUtils.makeRequestNotAuth(
+                post("/api/login")
+                        .content("{"
+                                + "\"firstName\": \"" + userDto.getFirstName() + "\","
+                                + "\"email\": \"" + userDto.getEmail() + "\","
+                                + "\"password\": \"" + userDto.getPassword() + "\""
+                                + "}")
+                        .contentType(APPLICATION_JSON)
+        );
+
+        response.andExpect(status().isOk());
+    }
+
+    @Test
     public void getUsersTest() throws Exception {
         User expectedUser1 = testUtils.registerUser(testUtils.getUser1Dto());
         User expectedUser2 = testUtils.registerUser(testUtils.getUser2Dto());
