@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Disabled;
 import org.springframework.test.web.servlet.ResultActions;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -174,7 +174,7 @@ public class UserControllerTest {
         UserDto updateUserDto = testUtils.getUser1Dto();
 
         ResultActions response = testUtils.makeRequestAuth(
-                patch("/api/users/" + defaultUser.getId())
+                put("/api/users/" + defaultUser.getId())
                         .content(asJson(updateUserDto))
                         .contentType(APPLICATION_JSON),
                 defaultUser.getEmail()
@@ -200,7 +200,7 @@ public class UserControllerTest {
         UserDto updateUserDto = testUtils.getUser1Dto();
 
         ResultActions response = testUtils.makeRequestAuth(
-                patch("/api/users/" + anotherUser.getId())
+                put("/api/users/" + anotherUser.getId())
                         .content(asJson(updateUserDto))
                         .contentType(APPLICATION_JSON),
                 defaultUser.getEmail()

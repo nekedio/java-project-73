@@ -4,17 +4,18 @@ import hexlet.code.dto.UserDto;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.service.UserService;
-import java.util.List;
+import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import static hexlet.code.config.SecurityConfig.DEFAULT_AUTHORITIES;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -48,20 +49,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findByEmail(getCurrentUserName()).get();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
-        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("USER"));
-        User user = repository.findByEmail(email).get();
-        return new org.springframework.security.core.userdetails.User(email, user.getPassword(), authorities);
-    }
-
     private void merge(User user, UserDto userDto) {
         User newUser = fromDto(userDto);
         user.setEmail(newUser.getEmail());
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
-        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user.setPassword(newUser.getPassword());
     }
 
     private User fromDto(UserDto userDto) {
@@ -72,5 +65,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();
     }
+    @Override
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username)
+                .map(this::buildSpringUser)
+                .orElseThrow(() -> new UsernameNotFoundException("Not found user with 'username': " + username));
+    }
 
+    private UserDetails buildSpringUser(final User user) {
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                DEFAULT_AUTHORITIES
+        );
+    }
 }
