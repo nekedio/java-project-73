@@ -45,7 +45,7 @@ public class TaskController {
     private final UserService userService;
 
     private static final String ONLY_OWNER_BY_ID = """
-            @taskRepository.findById(#id).get().getAuthor().getId().toString() == authentication.getName()
+            @taskRepository.getById(#id).getAuthor().getEmail() == authentication.getName()
         """;
 
     @Operation(summary = "Get list of all tasks")
