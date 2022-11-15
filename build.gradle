@@ -207,7 +207,7 @@ repositories {
 
 task checkstyle(type: Checkstyle) {
     source 'src'
-    exclude 'gradle/**'
+    exclude '.gradle/**'
 }
 
 dependencies {
