@@ -176,6 +176,9 @@ task stage(dependsOn: [clean, installDist])
 installDist.mustRunAfter clean
 */
 
+
+
+
 plugins {
     id 'application'
     id 'checkstyle'
@@ -192,11 +195,10 @@ plugins {
     id 'org.siouan.frontend-jdk11' version '6.0.0'
 }
 
-group = 'io.hexlet.javaspringblog'
-version = '1.0-SNAPSHOT'
+group = 'hexlet.code'
 
 application {
-    mainClass = 'io.hexlet.javaspringblog.App'
+    mainClass = 'hexlet.code.AppApplication'
 }
 
 repositories {
@@ -297,7 +299,7 @@ liquibase {
 // Выполняется только если ничего не изменилось.
 // *****************************************************************************
 frontend {
-    nodeVersion = '16.13.1'
+    nodeVersion = '14.19.0'
     installScript = 'install'
     assembleScript = 'run build'
     packageJsonDirectory = file("${projectDir}/frontend")
