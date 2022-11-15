@@ -179,6 +179,15 @@ installDist.mustRunAfter clean
 
 
 
+
+
+
+
+
+
+
+
+
 plugins {
     id 'application'
     id 'checkstyle'
@@ -205,10 +214,8 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType(Checkstyle) {
-    exclude '.gradle/**'
-}
 
+checkstyleMain.exclude '.gradle/**'
 
 
 dependencies {
