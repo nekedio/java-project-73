@@ -205,10 +205,11 @@ repositories {
     mavenCentral()
 }
 
-task checkstyle(type: Checkstyle) {
-    source 'src'
+tasks.withType(Checkstyle) {
     exclude '.gradle/**'
 }
+
+
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
