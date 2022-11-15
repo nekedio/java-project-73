@@ -217,6 +217,12 @@ repositories {
 
 checkstyleMain.exclude '.gradle/**'
 
+task checkstyleMain (type: Checkstyle) {
+    exclude '**/.gradle/**'
+    exclude '**/gradle/**'
+    exclude '**/project/**'
+}
+
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
